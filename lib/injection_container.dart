@@ -1,11 +1,17 @@
 import 'package:get_it/get_it.dart';
 import 'package:proyecto_final/data/datasources/challenge_local_datasource.dart';
 import 'package:proyecto_final/data/datasources/challenge_remote_datasource.dart';
+import 'package:proyecto_final/data/datasources/first_time_local_data_source.dart';
 import 'package:proyecto_final/data/repositories/challenge_repository_impl.dart';
+import 'package:proyecto_final/data/repositories/first_time_repository_impl.dart';
 import 'package:proyecto_final/domain/repositories/challenge_repository.dart';
+import 'package:proyecto_final/domain/repositories/i_first_time_repository.dart';
+import 'package:proyecto_final/domain/usecases/check_first_time_usecase.dart';
 import 'package:proyecto_final/domain/usecases/get_featured_challenges.dart';
-import 'package:proyecto_final/presentation/bloc/challenge_bloc.dart';
+import 'package:proyecto_final/presentation/bloc/challenge/challenge_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:proyecto_final/presentation/bloc/first_time/first_time_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
 
@@ -14,9 +20,17 @@ Future<void> init() async {
   sl.registerFactory(
     () => ChallengeBloc(getFeaturedChallenges: sl()),
   );
+  sl.registerFactory(
+    () => FirstTimeBloc(
+      checkFirstTimeUseCase: sl(),
+      setFirstTimeDoneUseCase: sl(),
+    ),
+  );
 
   // Use cases
   sl.registerLazySingleton(() => GetFeaturedChallenges(sl()));
+  sl.registerLazySingleton(() => CheckFirstTimeUseCase(sl()));
+  sl.registerLazySingleton(() => SetFirstTimeDoneUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<ChallengeRepository>(
@@ -24,6 +38,9 @@ Future<void> init() async {
       remoteDataSource: sl(),
       localDataSource: sl(),
     ),
+  );
+  sl.registerLazySingleton<IFirstTimeRepository>(
+    () => FirstTimeRepositoryImpl(sl()),
   );
 
   // Data sources
@@ -33,7 +50,13 @@ Future<void> init() async {
   sl.registerLazySingleton<ChallengeLocalDataSource>(
     () => ChallengeLocalDataSourceImpl(sl()),
   );
+  sl.registerLazySingleton(
+    () => FirstTimeLocalDataSource(sl()),
+  );
 
   // External
   sl.registerLazySingleton(() => http.Client());
+
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreferences);
 }

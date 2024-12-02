@@ -1,6 +1,7 @@
 // lib/presentation/pages/challenge_detail_page.dart
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/core/constants/app_colors.dart';
+import 'package:proyecto_final/core/constants/app_text_styles.dart';
 import 'package:proyecto_final/domain/entities/challenge.dart';
 
 class ChallengeDetailPage extends StatelessWidget {
@@ -33,16 +34,15 @@ class ChallengeDetailPage extends StatelessWidget {
                 children: [
                   Text(
                     challenge.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTextStyles.title,
                   ),
                   const SizedBox(height: 16),
                   Row(
                     children: [
-                      _buildTag('Alto Impacto', Colors.white.withOpacity(0.2)),
+                      _buildTag(
+                          'Alto Impacto',
+                          const Color.fromARGB(255, 56, 30, 30)
+                              .withOpacity(0.2)),
                       const SizedBox(width: 8),
                       _buildTag('Fácil', Colors.white.withOpacity(0.2)),
                     ],
@@ -63,7 +63,7 @@ class ChallengeDetailPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  ...challenge.steps.map((step) => _buildStep(step)).toList(),
+                  ...challenge.steps.map((step) => _buildStep(step)),
                   const SizedBox(height: 32),
                   SizedBox(
                     width: double.infinity,
@@ -71,7 +71,10 @@ class ChallengeDetailPage extends StatelessWidget {
                       onPressed: () {
                         // Implementar lógica para comenzar reto
                       },
-                      child: const Text('Comenzar Reto'),
+                      child: const Text(
+                        'Comenzar Reto',
+                        style: AppTextStyles.button,
+                      ),
                     ),
                   ),
                 ],
@@ -100,6 +103,7 @@ class ChallengeDetailPage extends StatelessWidget {
     );
   }
 
+  //Widget para la lista de 'pasos a seguir'
   Widget _buildStep(String step) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
@@ -108,7 +112,7 @@ class ChallengeDetailPage extends StatelessWidget {
         children: [
           const Icon(
             Icons.check_circle_outline,
-            color: AppColors.primary,
+            color: AppColors.textButton,
             size: 24,
           ),
           const SizedBox(width: 12),

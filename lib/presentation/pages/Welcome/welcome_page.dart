@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proyecto_final/presentation/bloc/first_time/first_time_bloc.dart';
+import 'package:proyecto_final/presentation/bloc/first_time/first_time_event.dart';
+import '../../../core/constants/app_colors.dart';
+import '../../../core/constants/app_text_styles.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -24,14 +27,20 @@ class WelcomePage extends StatelessWidget {
                     color: AppColors.primary,
                     shape: BoxShape.circle,
                   ),
-                  child: Center(
-                    child: Image.asset(
-                      'assets/images/logo.png',
-                      width: 80,
-                      height: 80,
+                  child: ClipOval(
+                    child: Transform.translate(
+                      offset: const Offset(1, 5),
+                      child: Image.asset(
+                        'assets/images/logo_eco.jpg',
+                        width: 120,
+                        height: 120,
+                        fit: BoxFit
+                            .cover, // Ajusta la imagen al tamaño del círculo
+                      ),
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 32),
 
                 // Título
@@ -53,8 +62,15 @@ class WelcomePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () =>
-                        Navigator.pushReplacementNamed(context, '/challenges'),
+                    onPressed: () async {
+                      context.read<FirstTimeBloc>().add(SetFirstTimeDone());
+                      // Espera a que el estado se actualice
+                      await Future.delayed(const Duration(milliseconds: 100));
+                      if (context.mounted) {
+                        Navigator.of(context)
+                            .pushReplacementNamed('/challenges');
+                      }
+                    },
                     child: const Text(
                       'Comenzar',
                       style: AppTextStyles.button,

@@ -1,8 +1,8 @@
 // BLoC
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proyecto_final/domain/usecases/get_featured_challenges.dart';
-import 'package:proyecto_final/presentation/bloc/challenge_event.dart';
-import 'package:proyecto_final/presentation/bloc/challenge_state.dart';
+import 'package:proyecto_final/presentation/bloc/challenge/challenge_event.dart';
+import 'package:proyecto_final/presentation/bloc/challenge/challenge_state.dart';
 
 class ChallengeBloc extends Bloc<ChallengeEvent, ChallengeState> {
   final GetFeaturedChallenges getFeaturedChallenges;

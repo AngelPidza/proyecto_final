@@ -3,7 +3,8 @@ import 'package:proyecto_final/core/constants/app_colors.dart';
 
 class AppTextStyles {
   static const title = TextStyle(
-    fontSize: 32,
+    fontSize: 27,
+    color: Color(0xFF2C473E),
     fontWeight: FontWeight.bold,
     fontFamily: 'Montserrat',
   );
@@ -15,6 +16,7 @@ class AppTextStyles {
   );
 
   static const button = TextStyle(
+    color: AppColors.textButton,
     fontSize: 18,
     fontWeight: FontWeight.w600,
     fontFamily: 'Montserrat',

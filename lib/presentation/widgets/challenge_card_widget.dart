@@ -1,6 +1,7 @@
 // lib/presentation/widgets/challenge_card.dart
 import 'package:flutter/material.dart';
 import 'package:proyecto_final/core/constants/app_colors.dart';
+import 'package:proyecto_final/core/constants/app_text_styles.dart';
 import 'package:proyecto_final/domain/entities/challenge.dart';
 
 class ChallengeCard extends StatelessWidget {
@@ -40,7 +41,7 @@ class ChallengeCard extends StatelessWidget {
                     ),
                     child: const Icon(
                       Icons.eco,
-                      color: AppColors.primary,
+                      color: AppColors.cardBackground,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -50,23 +51,20 @@ class ChallengeCard extends StatelessWidget {
                       children: [
                         Text(
                           challenge.title,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: AppTextStyles.subtitle,
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Impacto: ${challenge.impact}',
-                          style: TextStyle(
-                            color: AppColors.textSecondary,
+                          style: const TextStyle(
+                            color: AppColors.cardBackground,
                             fontSize: 14,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.chevron_right,
                     color: AppColors.textSecondary,
                   ),
