@@ -155,7 +155,7 @@ class _EcoDonationsScreenState extends State<EcoDonationsScreen> {
                     ),
                     child: Text(
                       'Donar \$${_selectedAmount.toStringAsFixed(0)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColors.textButton,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -212,7 +212,7 @@ class _EcoDonationsScreenState extends State<EcoDonationsScreen> {
           Container(
             width: 6,
             height: 6,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.primary,
               shape: BoxShape.circle,
             ),
@@ -228,12 +228,15 @@ class _EcoDonationsScreenState extends State<EcoDonationsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Row(
-          children: [
-            Icon(Icons.check_circle, color: AppColors.primary),
-            const SizedBox(width: 8),
-            const Text('¡Gracias por tu donación!'),
-          ],
+        title: const SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              Icon(Icons.check_circle, color: AppColors.primary),
+              SizedBox(width: 2),
+              Text('¡Gracias por tu donación!'),
+            ],
+          ),
         ),
         content: const Text(
           'Tu contribución ayudará a hacer una diferencia real en la conservación de nuestros ecosistemas.',
@@ -241,7 +244,7 @@ class _EcoDonationsScreenState extends State<EcoDonationsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(
+            child: const Text(
               'Cerrar',
               style: TextStyle(color: AppColors.textPrimary),
             ),
@@ -265,7 +268,7 @@ class _EcoDonationsScreenState extends State<EcoDonationsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Impacto Destacado',
               style: TextStyle(
                 fontSize: 24,
@@ -333,7 +336,7 @@ class _EcoDonationsScreenState extends State<EcoDonationsScreen> {
                   children: [
                     Text(
                       project['title'],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textSecondary,
@@ -350,7 +353,7 @@ class _EcoDonationsScreenState extends State<EcoDonationsScreen> {
                       ),
                       child: Text(
                         project['organization'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.textPrimary,
                           fontSize: 12,
                         ),
@@ -381,8 +384,8 @@ class _EcoDonationsScreenState extends State<EcoDonationsScreen> {
                       child: LinearProgressIndicator(
                         value: progress,
                         backgroundColor: Colors.grey[200],
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(AppColors.primary),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                            AppColors.primary),
                         minHeight: 8,
                       ),
                     ),
@@ -418,7 +421,7 @@ class _EcoDonationsScreenState extends State<EcoDonationsScreen> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Donar Ahora',
                       style: TextStyle(
                         color: AppColors.textButton,

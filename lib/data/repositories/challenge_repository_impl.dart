@@ -18,6 +18,7 @@ class ChallengeRepositoryImpl implements ChallengeRepository {
       final remoteChallenges = await remoteDataSource.getFeaturedChallenges();
       return remoteChallenges.map((dto) => dto.toDomain()).toList();
     } catch (e) {
+      print("No se pudo obtener los desafios");
       final localChallenges = await localDataSource.getFeaturedChallenges();
       return localChallenges.map((dto) => dto.toDomain()).toList();
     }

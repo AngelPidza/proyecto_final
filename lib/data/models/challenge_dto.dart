@@ -2,7 +2,7 @@
 import '../../domain/entities/challenge.dart';
 
 class ChallengeDTO {
-  final String id;
+  final String _id;
   final String title;
   final String description;
   final String impact;
@@ -10,29 +10,30 @@ class ChallengeDTO {
   final List<String> steps;
 
   ChallengeDTO({
-    required this.id,
+    required String id,
     required this.title,
     required this.description,
     required this.impact,
     required this.difficulty,
     required this.steps,
-  });
+  }) : _id = id;
 
   factory ChallengeDTO.fromJson(Map<String, dynamic> json) {
     return ChallengeDTO(
-      id: json['id'],
+      id: json['_id'], // Asegúrate de que la clave es '_id' y no 'id'
       title: json['title'],
       description: json['description'],
       impact: json['impact'],
       difficulty: json['difficulty'],
       steps: List<String>.from(
-          json['steps'] ?? []), // Convertimos el JSON array a List<String>
+          json['steps'] ?? []), // Convierte correctamente el array
     );
   }
 
+  // Convierte el DTO a un objeto de dominio (Challenge)
   Challenge toDomain() {
     return Challenge(
-      id: id,
+      id: _id,
       title: title,
       description: description,
       impact: impact,
@@ -41,9 +42,10 @@ class ChallengeDTO {
     );
   }
 
+  // Convierte el DTO a un Map para enviar a la base de datos o API
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      '_id': _id, // Asegúrate de usar '_id' en lugar de 'id' para las claves
       'title': title,
       'description': description,
       'impact': impact,

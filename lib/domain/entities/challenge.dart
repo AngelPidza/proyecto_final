@@ -1,10 +1,12 @@
+// lib/domain/entities/challenge.dart
 class Challenge {
-  final String id;
+  final String
+      id; // El id no debe ser privado en esta clase, ya que lo necesitas acceder
   final String title;
   final String description;
   final String impact;
   final String difficulty;
-  final List<String> steps; // Agregamos los steps
+  final List<String> steps;
 
   Challenge({
     required this.id,
